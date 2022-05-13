@@ -83,6 +83,7 @@ const arrImages1 = ['images/food_1.jpg','images/food_2.jpg','images/food_3.jpg',
 const arrImages2 = ['images/phone_1.jpg','images/phone_2.jpg','images/phone_3.jpg','images/phone_4.jpg','images/phone_5.jpg','images/phone_6.jpg','images/phone_7.jpg','images/phone_8.jpg'];
 const prices = ['31$','21$','19$','1000$','6$','500$','1400$','10$','144$','5$','200$','99$','222$','11$'];
 
+function funYear(){return Math.floor(Math.random() * 23);};
 for(let x =0;x<section.length;x++){
     switch(x){
         case 0:
@@ -91,7 +92,7 @@ for(let x =0;x<section.length;x++){
                 section[x].children[y].children[1].children[3].textContent = `${prices[Math.floor(Math.random() * prices.length)]}`;
                 let year;
                 for(let w = 0;w<1;w++){
-                    function funYear(){return Math.floor(Math.random() * 23);};
+                    
                     year = funYear();
                     if(year <= 16){
                         w=-1;
@@ -109,7 +110,7 @@ for(let x =0;x<section.length;x++){
                 section[x].children[y].children[1].children[3].textContent = `${prices[Math.floor(Math.random() * prices.length)]}`;
                 let year;
                 for(let w = 0;w<1;w++){
-                    function funYear(){return Math.floor(Math.random() * 23);};
+                    
                     year = funYear();
                     if(year <= 16){
                         w=-1;
@@ -127,7 +128,7 @@ for(let x =0;x<section.length;x++){
                 section[x].children[y].children[1].children[3].textContent = `${prices[Math.floor(Math.random() * prices.length)]}`;
                 let year;
                 for(let w = 0;w<1;w++){
-                    function funYear(){return Math.floor(Math.random() * 23);};
+                    
                     year = funYear();
                     if(year <= 16){
                         w=-1;
