@@ -74,7 +74,110 @@ for(let i = 0;i<allProducts.length;i++){
     });
 };
 
-
+//  add event for filter product
+let arr = [];
+for(let i = 0;i<filterProducts.length;i++){
+    // event for filter Date
+    filterProducts[i].children[1].addEventListener('click',function(){
+        const dateProduct = section[i].querySelectorAll('body #main .article .section .box .about .date .dateProduct');
+        for(let x = 0;x<section[i].childElementCount;x++){
+            arr.push(dateProduct[x].textContent);
+        }
+        // sort boxs Date
+        for(let x = 0;x<arr.length;x++){
+            for(let y = x+1;y<arr.length;y++){
+                if(arr[x].slice(-4,arr[x].length) < arr[y].slice(-4,arr[y].length)){
+                    [arr[y],arr[x]]=[arr[x],arr[y]];
+                }
+                if(arr[x].slice(-4,arr[x].length) == arr[y].slice(-4,arr[y].length)){
+                    if(arr[x].slice(-7,-5) < arr[y].slice(-7,-5)){
+                        [arr[y],arr[x]]=[arr[x],arr[y]];
+                    }
+                    if(arr[x].slice(-7,-5) == arr[y].slice(-7,-5)){
+                        if(arr[x].slice(0,2) < arr[y].slice(0,2)){
+                            [arr[y],arr[x]]=[arr[x],arr[y]];
+                        }
+                    }
+                }
+            }    
+        }
+        // display boxs 
+        const boxs = section[i].querySelectorAll('.box')
+        console.log(boxs);
+        for(let y = 0;y < section[i].childElementCount;y++){
+            for(let x = 0;x<arr.length;x++){
+                let BoxDate = boxs[y].children[1].children[2].children[1].textContent;
+                if(arr[x] == BoxDate){
+                    boxs[y].style.setProperty('order',x);
+                    boxs[y].style.setProperty('display','block');
+                    section[i].insertBefore(boxs[y],section[i].children[x]);
+                    break;
+                }
+                else{continue;};
+            };
+        };
+    });
+    // event for filter top to bottom
+    filterProducts[i].children[2].addEventListener('click',function(){
+        const price = section[i].querySelectorAll('body #main .article .section .box .about .price');
+        for(let x = 0;x<section[i].childElementCount;x++){
+            arr.push(price[x].textContent);
+        }
+        // sort boxs Date
+        for(let x = 0;x<arr.length;x++){
+            for(let y = x+1;y<arr.length;y++){
+                if(Number(arr[x].slice(0,-1)) < Number(arr[y].slice(0,-1))){
+                    [arr[y],arr[x]]=[arr[x],arr[y]];
+                }
+            }    
+        }
+        // display boxs 
+        const boxs = section[i].querySelectorAll('.box')
+        for(let y = 0;y < section[i].childElementCount;y++){
+            for(let x = 0;x<arr.length;x++){
+                let BoxDate = boxs[y].children[1].children[3].textContent;
+                if(arr[x] == BoxDate){
+                    boxs[y].style.setProperty('order',`${x}`);
+                    boxs[y].style.setProperty('display','block');
+                    section[i].insertBefore(boxs[y],section[i].children[x]);
+                    break;
+                }
+                else{continue;};
+            };
+        };
+    });
+    // event for filter bottom to top
+    filterProducts[i].children[3].addEventListener('click',function(){
+        const price = section[i].querySelectorAll('body #main .article .section .box .about .price');
+        for(let x = 0;x<section[i].childElementCount;x++){
+            arr.push(price[x].textContent);
+        }
+        // sort boxs Date
+        for(let x = 0;x<arr.length;x++){
+            for(let y = x+1;y<arr.length;y++){
+                if(Number(arr[x].slice(0,-1)) > Number(arr[y].slice(0,-1))){
+                    [arr[y],arr[x]]=[arr[x],arr[y]];
+                }
+            }    
+        }
+        // display boxs 
+        const boxs = section[i].querySelectorAll('.box')
+        console.log('===============');
+        for(let y = 0;y < section[i].childElementCount;y++){
+            for(let x = 0;x<arr.length;x++){
+                let BoxDate = boxs[y].children[1].children[3].textContent;
+                if(arr[x] == BoxDate){
+                    boxs[y].style.setProperty('order',x);
+                    console.log(x);
+                    boxs[y].style.setProperty('display','block');
+                    section[i].insertBefore(boxs[y],section[i].children[x]);
+                    break;
+                }
+                else{continue;};
+            };
+        };
+    });
+};
 
 
 // ================= event for images random
@@ -92,7 +195,6 @@ for(let x =0;x<section.length;x++){
                 section[x].children[y].children[1].children[3].textContent = `${prices[Math.floor(Math.random() * prices.length)]}`;
                 let year;
                 for(let w = 0;w<1;w++){
-                    
                     year = funYear();
                     if(year <= 16){
                         w=-1;
@@ -102,6 +204,7 @@ for(let x =0;x<section.length;x++){
                 let day =  Math.ceil(Math.random() * 29);if(day<10){day='0'+day;}
                 let month =  Math.ceil(Math.random() * 12);if(month<10){month='0'+month;}
                 section[x].children[y].children[1].children[2].children[1].textContent = `${day}-${month}-20${year}`;
+                section[x].children[y].style.setProperty('order',y);
             };
             break;
         case 1:
@@ -110,7 +213,6 @@ for(let x =0;x<section.length;x++){
                 section[x].children[y].children[1].children[3].textContent = `${prices[Math.floor(Math.random() * prices.length)]}`;
                 let year;
                 for(let w = 0;w<1;w++){
-                    
                     year = funYear();
                     if(year <= 16){
                         w=-1;
@@ -120,6 +222,7 @@ for(let x =0;x<section.length;x++){
                 let day =  Math.ceil(Math.random() * 29);if(day<10){day='0'+day;}
                 let month =  Math.ceil(Math.random() * 12);if(month<10){month='0'+month;}
                 section[x].children[y].children[1].children[2].children[1].textContent = `${day}-${month}-20${year}`;
+                section[x].children[y].style.setProperty('order',y);
             };
             break;
         case 2:
@@ -128,7 +231,6 @@ for(let x =0;x<section.length;x++){
                 section[x].children[y].children[1].children[3].textContent = `${prices[Math.floor(Math.random() * prices.length)]}`;
                 let year;
                 for(let w = 0;w<1;w++){
-                    
                     year = funYear();
                     if(year <= 16){
                         w=-1;
@@ -138,6 +240,7 @@ for(let x =0;x<section.length;x++){
                 let day =  Math.ceil(Math.random() * 29);if(day<10){day='0'+day;}
                 let month =  Math.ceil(Math.random() * 12);if(month<10){month='0'+month;}
                 section[x].children[y].children[1].children[2].children[1].textContent = `${day}-${month}-20${year}`;
+                section[x].children[y].style.setProperty('order',y);
             };
             break;
     };
