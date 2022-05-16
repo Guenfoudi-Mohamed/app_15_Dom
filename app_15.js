@@ -75,14 +75,15 @@ for(let i = 0;i<allProducts.length;i++){
 };
 
 //  add event for filter product
-let arr = [];
 for(let i = 0;i<filterProducts.length;i++){
     // event for filter Date
     filterProducts[i].children[1].addEventListener('click',function(){
+        let arr = [];
         const dateProduct = section[i].querySelectorAll('body #main .article .section .box .about .date .dateProduct');
         for(let x = 0;x<section[i].childElementCount;x++){
             arr.push(dateProduct[x].textContent);
         }
+        console.log(arr);
         // sort boxs Date
         for(let x = 0;x<arr.length;x++){
             for(let y = x+1;y<arr.length;y++){
@@ -104,27 +105,27 @@ for(let i = 0;i<filterProducts.length;i++){
         // display boxs 
         const boxs = section[i].querySelectorAll('.box')
         console.log(boxs);
-        for(let y = 0;y < section[i].childElementCount;y++){
-            for(let x = 0;x<arr.length;x++){
-                let BoxDate = boxs[y].children[1].children[2].children[1].textContent;
-                if(arr[x] == BoxDate){
-                    boxs[y].style.setProperty('order',x);
-                    boxs[y].style.setProperty('display','block');
+        console.log(arr);
+        for(let x = 0;x<arr.length;x++){
+            for(let y = 0;y < boxs.length;y++){
+                if(arr[x] == boxs[y].children[1].children[2].children[1].textContent){
+                    boxs[y].style.cssText = `display:block;`;
                     section[i].insertBefore(boxs[y],section[i].children[x]);
                     break;
                 }
-                else{continue;};
             };
         };
+        arr=[];
     });
     // event for filter top to bottom
     filterProducts[i].children[2].addEventListener('click',function(){
+        let arr = [];
         const price = section[i].querySelectorAll('body #main .article .section .box .about .price');
         for(let x = 0;x<section[i].childElementCount;x++){
             arr.push(price[x].textContent);
         }
-        // sort boxs Date
-        for(let x = 0;x<arr.length;x++){
+        // sort boxs TtB
+        for(let x = 0;x<arr.length-1;x++){
             for(let y = x+1;y<arr.length;y++){
                 if(Number(arr[x].slice(0,-1)) < Number(arr[y].slice(0,-1))){
                     [arr[y],arr[x]]=[arr[x],arr[y]];
@@ -132,28 +133,38 @@ for(let i = 0;i<filterProducts.length;i++){
             }    
         }
         // display boxs 
-        const boxs = section[i].querySelectorAll('.box')
-        for(let y = 0;y < section[i].childElementCount;y++){
-            for(let x = 0;x<arr.length;x++){
-                let BoxDate = boxs[y].children[1].children[3].textContent;
-                if(arr[x] == BoxDate){
-                    boxs[y].style.setProperty('order',`${x}`);
-                    boxs[y].style.setProperty('display','block');
-                    section[i].insertBefore(boxs[y],section[i].children[x]);
-                    break;
+        const boxs = section[i].querySelectorAll('.box');
+        let arr1 = [];
+        let conteur = false;
+        for(let x = 0;x<arr.length;x++){
+            for(let y = 0;y<boxs.length;y++){
+                for(let w = 0;w<arr1.length;w++){
+                    if(y == arr1[w]){
+                        conteur=true;
+                        break;
+                    }
                 }
-                else{continue;};
-            };
+                if(conteur){conteur=false;continue;}
+                if(arr[x] == boxs[y].children[1].children[3].textContent){
+                    arr1.push(y);
+                    boxs[y].style.cssText = `display:block;`;
+                    section[i].insertBefore(boxs[y],section[i].children[x]);          
+                    break;
+                } 
+            }
         };
+        arr = [];
+        arr1 = [];
     });
     // event for filter bottom to top
     filterProducts[i].children[3].addEventListener('click',function(){
+        let arr = [];
         const price = section[i].querySelectorAll('body #main .article .section .box .about .price');
         for(let x = 0;x<section[i].childElementCount;x++){
             arr.push(price[x].textContent);
         }
-        // sort boxs Date
-        for(let x = 0;x<arr.length;x++){
+        // sort boxs BtT
+        for(let x = 0;x<arr.length-1;x++){
             for(let y = x+1;y<arr.length;y++){
                 if(Number(arr[x].slice(0,-1)) > Number(arr[y].slice(0,-1))){
                     [arr[y],arr[x]]=[arr[x],arr[y]];
@@ -161,21 +172,28 @@ for(let i = 0;i<filterProducts.length;i++){
             }    
         }
         // display boxs 
-        const boxs = section[i].querySelectorAll('.box')
-        console.log('===============');
-        for(let y = 0;y < section[i].childElementCount;y++){
-            for(let x = 0;x<arr.length;x++){
-                let BoxDate = boxs[y].children[1].children[3].textContent;
-                if(arr[x] == BoxDate){
-                    boxs[y].style.setProperty('order',x);
-                    console.log(x);
-                    boxs[y].style.setProperty('display','block');
-                    section[i].insertBefore(boxs[y],section[i].children[x]);
-                    break;
+        const boxs = section[i].querySelectorAll('.box');
+        let arr1 = [];
+        let conteur = false;
+        for(let x = 0;x<arr.length;x++){
+            for(let y = 0;y<boxs.length;y++){
+                for(let w = 0;w<arr1.length;w++){
+                    if(y == arr1[w]){
+                        conteur=true;
+                        break;
+                    }
                 }
-                else{continue;};
-            };
+                if(conteur){conteur=false;continue;}
+                if(arr[x] == boxs[y].children[1].children[3].textContent){
+                    arr1.push(y);
+                    boxs[y].style.cssText = `display:block;`;
+                    section[i].insertBefore(boxs[y],section[i].children[x]);          
+                    break;
+                } 
+            }
         };
+        arr = [];
+        arr1 = [];
     });
 };
 
@@ -204,7 +222,7 @@ for(let x =0;x<section.length;x++){
                 let day =  Math.ceil(Math.random() * 29);if(day<10){day='0'+day;}
                 let month =  Math.ceil(Math.random() * 12);if(month<10){month='0'+month;}
                 section[x].children[y].children[1].children[2].children[1].textContent = `${day}-${month}-20${year}`;
-                section[x].children[y].style.setProperty('order',y);
+                // section[x].children[y].style.setProperty('order',y);
             };
             break;
         case 1:
@@ -222,7 +240,7 @@ for(let x =0;x<section.length;x++){
                 let day =  Math.ceil(Math.random() * 29);if(day<10){day='0'+day;}
                 let month =  Math.ceil(Math.random() * 12);if(month<10){month='0'+month;}
                 section[x].children[y].children[1].children[2].children[1].textContent = `${day}-${month}-20${year}`;
-                section[x].children[y].style.setProperty('order',y);
+                // section[x].children[y].style.setProperty('order',y);
             };
             break;
         case 2:
@@ -240,65 +258,8 @@ for(let x =0;x<section.length;x++){
                 let day =  Math.ceil(Math.random() * 29);if(day<10){day='0'+day;}
                 let month =  Math.ceil(Math.random() * 12);if(month<10){month='0'+month;}
                 section[x].children[y].children[1].children[2].children[1].textContent = `${day}-${month}-20${year}`;
-                section[x].children[y].style.setProperty('order',y);
+                // section[x].children[y].style.setProperty('order',y);
             };
             break;
     };
 }
-
-// for(let i = 0;i<allProducts.length;i++){
-    // allProducts[i].addEventListener('click',function(){
-    //     if(allProducts[i].textContent != 'Back'){
-    //         for(let x = 0;x<articles.length;x++){
-    //             if(i==x){
-    //                 articles[x].style.setProperty(`display`,`block`);
-    //                 for(let y = 0;y<articles[x].childElementCount;y++){
-    //                     articles[x].children[y].style.setProperty(`display`,`flex`);
-    //                 };
-    //                 // dispaly children element second products
-    //                 for(let y = 4;y<articles[i].children[1].children.length;y++){
-    //                     articles[i].children[1].children[y].style.setProperty('display','block');
-    //                 }
-    //                 allProducts[x].textContent = 'Back';
-    //                 if(x==articles.length-1){
-    //                     articles[x].parentElement.insertBefore(articles[x],btnArtDispal);
-    //                 };
-    //                 btnArtDispal.textContent = 'More Products';//Note
-    //                 filterProducts[x].style.setProperty('display','inline-block');
-    //             }
-    //             else if(i!=x){
-    //                 articles[x].style.setProperty(`display`,`none`);
-    //             };
-    //         };
-    //     }
-    //     else if(allProducts[i].textContent == 'Back'){
-    //         for(let x = 0;x<articles.length;x++){
-    //             if(x!=(articles[x].childElementCount-1)){
-    //                 articles[x].style.setProperty(`display`,`block`);
-    //                 for(let y = 0;y<articles[x].childElementCount;y++){
-    //                     articles[x].children[articles[x].children.length-1].style.setProperty('display','none');
-    //                 };
-    //                 allProducts[i].textContent = 'All Products';
-    //             }
-    //             else{
-    //                 articles[x].style.setProperty(`display`,`none`);
-    //                 allProducts[i].textContent = 'All Products';
-    //                 btnArtDispal.textContent = 'More Products';
-    //                 // articles[x].children[articles[x].children.length-1].style.setProperty('display','none');
-    //                 for(let y = 0;y<allProducts.length;y++){
-    //                     if(allProducts[y].textContent == 'Back'){
-    //                         allProducts[y].textContent = 'All Products';
-    //                     };
-    //                 };
-    //                 for(let y = 4;y<articles[i].children[1].children.length;y++){
-    //                     articles[i].children[1].children[y].style.setProperty('display','none');
-    //                 }
-    //             };
-    //             filterProducts[x].style.setProperty('display','none');
-    //         }
-    //     }
-    // });
-// };
-
-
-
