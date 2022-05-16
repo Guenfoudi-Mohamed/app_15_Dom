@@ -2,7 +2,7 @@
 *{margin: 0px;padding: 0px;outline: none;text-decoration: none;list-style: none;box-sizing: border-box;}
 :is(::after,::before){margin: 0px;padding: 0px;}
 body{min-height: 1000px;margin: 0px auto;font-family: Arial, Helvetica, sans-serif;}
-body #header{width: 100%;background-color:rgb(255, 196, 0);position:fixed;top: 0px;padding: 2em 0em;}
+body #header{width: 100%;background-color:rgb(255, 196, 0);position:fixed;top: 0px;padding: 18px 0em;}
 body #header .navBar{display: flex;justify-content: space-between;align-items: center;max-width: 80%;width: 1100px; margin: 0px auto;flex-wrap: wrap;position: relative;}
     /* start logo */
 body #header .navBar .logo{font-size:1.5em;}
@@ -13,9 +13,9 @@ body #header .navBar .contentRight .nav .list{display: flex;}
 body #header .navBar .contentRight .nav .list .item{display: inline-block;margin-right: 15px;}
 body #header .navBar .contentRight .nav .list .item:last-child{margin-right:0px;}
 body #header .navBar .contentRight .nav .list .item a{color: #000;font-weight: bold;}
-body #header .navBar .contentRight .buttons .btn{font-size: 17px;padding:2.5px;border:none;}
-body #header .navBar .contentRight .buttons .btn:nth-child(1){width: 190px;}
-body #header .navBar .contentRight .buttons .btn:nth-child(2){width: 100px;background-color: dodgerblue;color:aliceblue;cursor: pointer;}
+body #header .navBar .contentRight .buttons .search{font-size: 17px;padding:2.5px;border:none;}
+body #header .navBar .contentRight .buttons .search:nth-child(1){width: 190px;padding-left: 5px;}
+body #header .navBar .contentRight .buttons .search:nth-child(2){width: 100px;background-color: dodgerblue;color:aliceblue;cursor: pointer;}
     /* satrt humbrger */
 body #header .navBar .humbrger{width: 30px;height: 21px;position: absolute;right: 0px;top: 3.5px; display: none;justify-content: space-between;align-items: center;flex-direction: column;cursor: pointer;}
 body #header .navBar .humbrger .bar{width: 100%;height: 3px;background-color: #000;border-radius: 3px;}
@@ -28,6 +28,7 @@ body #header .navBar .humbrger .bar{width: 100%;height: 3px;background-color: #0
     body #header .navBar .contentRight .nav .list{display: block;}
     body #header .navBar .contentRight .nav .list .item{display: block;margin-bottom: 7px;}
     body #header .navBar .contentRight .nav .list .item:last-child{margin-bottom: 0px;}
+    body #header .navBar .contentRight .buttons .search:nth-child(2){display: block;margin-top: 10px;width: 190px;}
     body #header .navBar .humbrger{display: flex;}
 }
 /* start main */
@@ -43,7 +44,7 @@ body #main .article .title{display: flex;justify-content: space-between;align-it
 body #main .article .title :is(.content_Left span,a.allProducts){font-weight: bold;} 
 body #main .article .title .content_Left .filterProducts{background-color: black;color: #fff;border: none;padding:5px;font-size: 17px;display: none/*inline-block*/;}
 body #main .article .title .content_Left > span{font-size: 17px;background-color:rgb(255, 196, 0);width: fit-content;padding: 5px;border-radius: 5px;margin-top: -1px;}
-body #main .article .title > a.allProducts{font-size: 23px;color:#000;}
+body #main .article .title > a.allProducts{font-size: 23px;color:#000;padding: 5px 0px;}
 body #main .article:last-child{display: none;}
         /* start section */
 body #main .article .section{margin: 0px auto;width: 100%; display: flex;justify-content:space-between;flex-wrap: wrap;gap: 10px;}
@@ -65,4 +66,9 @@ body #main .article .section .box .about .btnAddCart{margin-top:5px;padding: 5px
 }
 @media(min-width: 280px ) and (max-width:674px){
     body #main .article .section{width:100%;max-width:initial;}
+}
+/* start Box Products Search */
+body #main .BoxProductsSearch{width: 95vw;min-height: calc(100vh - 64px); background-color: rgba(128, 255, 0, 0.158);display: none;flex-wrap: wrap;justify-content: center; position: fixed;max-width: 1440px;left: 50%;top: 64px;transform: translateX(-50%);}
+@media (min-width:280px) and (max-width:950px) {
+    body #main .BoxProductsSearch{top: 249px;}
 }
