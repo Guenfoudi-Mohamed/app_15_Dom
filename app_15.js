@@ -28,6 +28,7 @@ btnArtDispal.onclick = function(){
 for(let i = 0;i<allProducts.length;i++){
     allProducts[i].addEventListener('click',function(){ 
         if(allProducts[i].textContent != 'Back'){
+            filterProducts[i].selectedIndex = 0;        //for select children 0
             // display articles
             for(let x = 0;x<articles.length;x++){
                 if(i==x){
@@ -83,7 +84,6 @@ for(let i = 0;i<filterProducts.length;i++){
         for(let x = 0;x<section[i].childElementCount;x++){
             arr.push(dateProduct[x].textContent);
         }
-        console.log(arr);
         // sort boxs Date
         for(let x = 0;x<arr.length;x++){
             for(let y = x+1;y<arr.length;y++){
@@ -104,8 +104,6 @@ for(let i = 0;i<filterProducts.length;i++){
         }
         // display boxs 
         const boxs = section[i].querySelectorAll('.box')
-        console.log(boxs);
-        console.log(arr);
         for(let x = 0;x<arr.length;x++){
             for(let y = 0;y < boxs.length;y++){
                 if(arr[x] == boxs[y].children[1].children[2].children[1].textContent){
@@ -197,6 +195,13 @@ for(let i = 0;i<filterProducts.length;i++){
     });
 };
 
+
+// event for Search products
+const btnSearch = document.querySelector('body #header .navBar .contentRight .buttons .btnSearch');
+btnSearch.addEventListener('click',function(){
+    const inpSearch = document.querySelector('body #header .navBar .contentRight .buttons .inpSearch');
+    if(inpSearch.value.length == 0){this.style.setProperty('color','red');}else{this.style.setProperty('color','black');}
+});
 
 // ================= event for images random
 const arrImages0 = ['images/al1.jpg','images/al2.jpg','images/al3.jpg','images/al4.jpg','images/al5.jpg','images/al6.jpg','images/p1.jpg','images/p2.jpg'];
