@@ -389,13 +389,14 @@ for(let i = 0;i<btnAddCart.length;i++){
 // event for button buy products
 const btnBuy = document.querySelector('body #boxsProducts .cartBox .contentBottom .btnBuy');
 btnBuy.addEventListener('click',function(){
+    let orderPrice = Total();
     if(productsCart.children.length>0){
         for(let x = productsCart.children.length-1;x>=0;x--){
             productsCart.children[x].remove();
         }
-        alert('your Order are placed');
         arrMatricule=[];
         Total();
+        setTimeout(function(){alert(`your Order are placed : ${orderPrice}$`);},250); 
     }
     else{alert('add products !!');}
 });
