@@ -14,8 +14,10 @@ const cartBox = document.querySelector('body #boxsProducts .cartBox');
 // event for display Boxs Products 'CART'
 cart.addEventListener('click',function(){
     boxsProducts.style.setProperty('display','block');
+    cartBox.style.setProperty('transition',`.5s`);
     setTimeout(function(){
         cartBox.style.setProperty('transform','translateX(-100%)');
+
     },80);
     const removeCart = document.querySelector('body #boxsProducts .cartBox .headCart .removeCart');
     removeCart.addEventListener('click',function(){
@@ -64,8 +66,8 @@ for(let i = 0;i<allProducts.length;i++){
             // change all text Content 
             allProducts[i].textContent = 'Back';
             // last all products
+            btnArtDispal.textContent = 'More Products';
             if(i == allProducts.length-1){
-                btnArtDispal.textContent = 'More Products';
                 articles[i].parentElement.insertBefore(btnArtDispal,articles[i]);
                 articles[i].parentElement.insertBefore(btnArtDispal,articles[articles.length]);
             };
@@ -218,28 +220,33 @@ for(let i = 0;i<filterProducts.length;i++){
 // event for Search products
 const btnSearch = document.querySelector('body #header .navBar .contentRight .buttons .btnSearch');
 const inpSearch = document.querySelector('body #header .navBar .contentRight .buttons .inpSearch');
-const BoxProductsSearch = document.querySelector('body #main .container .BoxProductsSearch');
+// const BoxProductsSearch = document.querySelector('body #main .container .BoxProductsSearch');
+
     // event for inp search
 inpSearch.addEventListener('keyup',function(){
     inpSearch.value = inpSearch.value.trimStart();
     inpSearch.value = inpSearch.value.trimEnd();
-    if(inpSearch.value == ''){btnSearch.click();};
+    if(inpSearch.value == ''){
+        btnSearch.click();
+        articles[articles.length-1].style.setProperty('display','none');
+    };
 });
+
     // event for btn search
 btnSearch.addEventListener('click',function(){
-    function displayContent(value){
-        for(let i = 0;i<articles.length;i++){
-            articles[i].style.setProperty('display',value);
-        };
-        btnArtDispal.style.setProperty('display',value);
-    }
-    for(let i = BoxProductsSearch.children.length-1;0 <= i;i--){
-        BoxProductsSearch.children[i].remove();
-    };
+
     if(inpSearch.value.trim().length != 0){
-        displayContent('none');
-        BoxProductsSearch.style.setProperty('display','flex');
-        //inpSearch.value;
+        for(let i = 0;i<articles.length;i++){
+            articles[i].children[0].style.setProperty('display','none');
+            articles[i].style.setProperty('display','block');
+        };
+        btnArtDispal.style.setProperty('display','none');
+
+        for(let i = 0;i<section.length;i++){
+            for(let x = 0;x<section[i].children.length;x++){
+                section[i].children[x].style.setProperty('display','none');
+            }
+        };
         let conteur = 0;
         for(let i = 0;i<section.length;i++){
             for(let x = 0;x<section[i].children.length;x++){
@@ -247,24 +254,33 @@ btnSearch.addEventListener('click',function(){
                     let result = section[i].children[x].children[1].children[y].textContent;
                     result = result.toLocaleLowerCase();
                     if(result.search(inpSearch.value.toLocaleLowerCase()) > -1){
-                        BoxProductsSearch.appendChild(section[i].children[x].cloneNode(true));
+                        section[i].children[x].style.setProperty('display','block');
                         conteur++; 
                         break;
                     }
                 }
             }
-        }
-        if(conteur != 0){
-            conteur=0;
-        }else if(conteur == 0){
-            let h1 = document.createElement('h1');
-            h1.textContent = 'No Result!';
-            BoxProductsSearch.appendChild(h1);
         }   
+        if(conteur == 0){alert('no result !');inpSearch.value='';btnSearch.click();}
     }
     else if(inpSearch.value.trim().length == 0){
-        displayContent('block');
-        BoxProductsSearch.style.setProperty('display','flex');
+        for(let i = 0;i<articles.length;i++){
+            articles[i].style.setProperty('display','block');
+            articles[i].children[0].style.setProperty('display','flex');
+            allProducts[i].textContent = 'All Products';
+            if(i==articles.length-1){articles[i].style.setProperty('display','none');allProducts[i].textContent = 'All Products';}
+        };
+        btnArtDispal.style.setProperty('display','block');
+        btnArtDispal.textContent = 'More Products';
+        for(let i = 0;i<section.length;i++){
+            for(let x = 0;x<section[i].children.length;x++){
+                if(x > 3){
+                    section[i].children[x].style.setProperty('display','none'); 
+                    continue;
+                }
+                section[i].children[x].style.setProperty('display','block');
+            }
+        };
     }
 });
 
@@ -286,6 +302,7 @@ function Total(){
     }
     const total = document.querySelector('body #boxsProducts .cartBox .contentBottom .priceTotal');
     total.textContent = totalPrice+'$';
+    return totalPrice;
 }
 
 // function for add product and remove  <-<- /|-_-|\
@@ -326,11 +343,13 @@ for(let i = 0;i<btnAddCart.length;i++){
             }
             numMatricule = -1;
             Total();
+            cart.click();
         }else{
             arrMatricule.push(Number(box.getAttribute('matricule')));
             box.style.setProperty('display','flex');
             productsCart.insertBefore(box,productsCart.children[0]);
             Total();
+            cart.click();
         };
         
         
@@ -370,11 +389,15 @@ for(let i = 0;i<btnAddCart.length;i++){
 // event for button buy products
 const btnBuy = document.querySelector('body #boxsProducts .cartBox .contentBottom .btnBuy');
 btnBuy.addEventListener('click',function(){
-    for(let x = productsCart.children.length-1;x>=0;x--){
-        productsCart.children[x].remove();
+    if(productsCart.children.length>0){
+        for(let x = productsCart.children.length-1;x>=0;x--){
+            productsCart.children[x].remove();
+        }
+        alert('your Order are placed');
+        arrMatricule=[];
+        Total();
     }
-    console.log('your Order are placed');
-    Total();
+    else{alert('add products !!');}
 });
 
 // ================= event for images prices random
