@@ -28,7 +28,7 @@ function Total(){
         totalPrice += price*count;
     }
     const total = document.querySelector('body #boxsProducts .cartBox .contentBottom .priceTotal');
-    total.textContent = totalPrice+'$';
+    total.textContent ='Total: '+totalPrice+'$';
     return totalPrice;
 }
 
@@ -102,11 +102,17 @@ btnSearch.addEventListener('click',function(){
                 }
             }
         }
-        // calcul price total
-        const boxsProducts = document.querySelector('body #boxsProducts');
-        for(let i = 0;i<boxsProducts.childElementCount;i++){
-            boxsProducts.children[i].style.setProperty('display','block');
+
+        // display all boxs in BoxProductsSearch
+        for(let i = 0;i<BoxProductsSearch.childElementCount;i++){
+            BoxProductsSearch.children[i].style.setProperty('display','block');
         };
+
+        // const boxsProducts = document.querySelector('body #boxsProducts');
+        // for(let i = 0;i<boxsProducts.childElementCount;i++){
+        //     boxsProducts.children[i].style.setProperty('display','block');
+        // };
+
         // add event listner for box 'add to cart'
         const btnAddCart  = document.querySelectorAll('body #main .container .BoxProductsSearch .box .about .btnAddCart');
         for(let i = 0;i<btnAddCart.length;i++){
