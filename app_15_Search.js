@@ -43,11 +43,12 @@ function eventInputRemove(){
     }
 
     // event for button remove product from cart
+
     const removeProduct = document.querySelectorAll('body #boxsProducts .productsCart .box .removeProduct');
     for(let w = 0;w<removeProduct.length;w++){
         removeProduct[w].onclick = function(){
             // for remove matricule product from array
-            numMatricule =  Number(removeProduct[w].parentElement.getAttribute('matricule'));
+            let numMatricule =  Number(removeProduct[w].parentElement.getAttribute('matricule'));
             for(let x = 0;x<arrMatricule.length;x++){
                 if(arrMatricule[x] == numMatricule){
                     for(let y = x;y<arrMatricule.length-1;y++){
