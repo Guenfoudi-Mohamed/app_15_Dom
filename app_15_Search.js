@@ -33,6 +33,7 @@ function Total(){
 }
 
 // event for inputCount and remove product from cart
+let arrMatricule = [];
 function eventInputRemove(){
     const productsCart = document.querySelector('body #boxsProducts .productsCart');
     // add event for input count
@@ -68,6 +69,7 @@ function eventInputRemove(){
 }
 
 // event for btn search
+
 btnSearch.addEventListener('click',function(){
     const section = document.querySelectorAll('body #main .container .article .section');
     const BoxProductsSearch = document.querySelector('body #main .container .BoxProductsSearch');
