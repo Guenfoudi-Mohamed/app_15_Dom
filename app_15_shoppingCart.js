@@ -21,7 +21,7 @@ cart.addEventListener('click',function(){
 
 
 
-let arrMatricule = [];
+
 const btnAddCart  = document.querySelectorAll('body #main .container .article .section .box .about .btnAddCart');
 for(let i = 0;i<btnAddCart.length;i++){
     btnAddCart[i].addEventListener('click',function(){
@@ -62,7 +62,6 @@ for(let i = 0;i<btnAddCart.length;i++){
             numMatricule = -1;
             Total();
             cart.click();
-            eventInputRemove();
         }else{
             arrMatricule.push(Number(box.getAttribute('matricule')));
             box.style.setProperty('display','flex');
