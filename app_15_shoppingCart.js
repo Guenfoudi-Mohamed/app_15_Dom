@@ -12,14 +12,15 @@ cart.addEventListener('click',function(){
         cartBox.style.setProperty('transform','translateX(-100%)');
 
     },80);
-    const removeCart = document.querySelector('body #boxsProducts .cartBox .headCart .removeCart');
-    removeCart.addEventListener('click',function(){
-        cartBox.style.setProperty('transform','translateX(0%)');
-        boxsProducts.style.setProperty('display','none');
-    });
+    
 });
 
-
+//Hide cart
+const removeCart = document.querySelector('body #boxsProducts .cartBox .headCart .removeCart');
+removeCart.addEventListener('click',function(){
+    cartBox.style.setProperty('transform','translateX(0%)');
+    boxsProducts.style.setProperty('display','none');
+});
 
 
 const btnAddCart  = document.querySelectorAll('body #main .container .article .section .box .about .btnAddCart');
@@ -85,6 +86,7 @@ btnBuy.addEventListener('click',function(){
         arrMatricule=[];
         Total();
         setTimeout(function(){alert(`your Order are placed : ${orderPrice}$`);},250); 
+        removeCart.click();
     }
     else{alert('add products !!');}
 });
